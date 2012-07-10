@@ -8,11 +8,13 @@ For now just copy over the files in this repository to your project.
 
 ## Usage
 
-An API key is needed to use the iTVDb wrapper in your iOS app, except for one call: `findByName:`, which technically can be called without one. The following shows how to retrieve all TV shows that match 'Game of Thrones':
+An API key is needed to use the iTVDb wrapper in your iOS app, except for one call: `findByName:`, which technically can be called without one. The following will show you how to retrieve all the TV shows that match 'Game of Thrones':
 
     NSMutableArray *shows = [TVDbShow findByName:@"Game of Thrones"];
 
-This will retrieve an XML file from the TheTVDB API, convert it to a NSDictionary and load it into a TVDbShow object, which in turn will be added to the NSMutableArray. The data retrieved is some basic information about the TV show. If you want more detailed information, an API key is needed, since this has to be retrieved with another API call. The NSMutableArray `shows` contains TVDbShow instances, in this case it's a single object. The following properties can be accessed from the TVDbShow instance:
+This will internally retrieve an XML file from the TVDB API, convert it to a NSDictionary and load it into a TVDbShow object, which in turn will be added to the NSMutableArray called `shows`. The data retrieved from this call is some basic information about the TV show.
+
+If you want more detailed information, an API key is needed. Since this has to be retrieved with another API call. The NSMutableArray `shows` can contain multiple TVDbShow instances, but in this case it's a single object. The following properties can be accessed from the TVDbShow instance:
 
     show.showId           // 121361
     show.premiereDate     // 2011-04-17
@@ -24,12 +26,12 @@ This will retrieve an XML file from the TheTVDB API, convert it to a NSDictionar
 
 As mentioned above, all API calls except for `findByName:` on the `TVDbShow` class need an API key. An API key can be retrieved by [registering](http://thetvdb.com/?tab=apiregister) for one on the TVDB website. Once you have an API key, you'll be able to use the other methods.
 
-To retrieve the detailed information of 'Game of Thrones', the `seriesid` from the previous API call is needed. Below is an example of retrieving such information and setting your API key.
+To retrieve the detailed information of 'Game of Thrones', the `showId` from the previous API call is needed. Below is an example of retrieving such information and setting your API key.
 
     [[TVDbClient sharedInstance] setApiKey: @"YOUR API KEY"];
     TVDbShow *show = [TVDbShow findById:[NSNumber numberWithInt:121361]];
 
-The properties of `show` include all of the above and in addition to that, the following properties:
+The properties of `show` include all of the above and in addition to that, the following:
 
     show.status          // Continuing
     show.genre           // ["Action and Adventure", "Drama", "Fantasy"]
@@ -44,11 +46,11 @@ The properties of `show` include all of the above and in addition to that, the f
 
 ## Notice!
 
-The TVDB hasn't been completely covered yet. Right now, it includes the above, so it's a WIP.
+The TVDB XML API hasn't been completely covered yet. Right now, it includes the above. So, obviously it's a WIP.
 
 ## Credit where credit is due
 
-iTVDb uses the [XML-to-NSDictionary](https://github.com/bcaccinolo/XML-to-NSDictionary) library by bcaccinolo.
+iTVDb uses the [XML-to-NSDictionary](https://github.com/bcaccinolo/XML-to-NSDictionary) library by bcaccinolo to convert the retrieved XML into a NSDictionary.
 
 ## Contributing
 
