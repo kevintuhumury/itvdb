@@ -7,6 +7,7 @@
 //
 
 #import "TVDbEpisode.h"
+#import "TVDbClient.h"
 
 @interface TVDbEpisode()
 

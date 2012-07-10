@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class TVDbClient;
+
 @interface TVDbEpisode : NSObject
 
 @property (nonatomic, retain) NSNumber *episodeId;
