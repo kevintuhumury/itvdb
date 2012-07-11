@@ -17,10 +17,10 @@ This will internally retrieve an XML file from the TVDB API, convert it to a NSD
 If you want more detailed information, an API key is needed. Since this has to be retrieved with another API call. The NSMutableArray `shows` can contain multiple TVDbShow instances, but in this case it's a single object. The following properties can be accessed from the TVDbShow instance:
 
     show.showId           // 121361
-    show.premiereDate     // 2011-04-17
-    show.imdbId           // tt0944947
-    show.description      // Based on the fantasy novel series "A Song of Ice and Fire," Game of Thrones explores the story of an epic battle among seven kingdoms and two ruling families in the only game that matters - the Game of Thrones. All seek control of the Iron Throne, the possession of which ensures survival through the 40-year winter to come.
     show.title            // Game of Thrones
+    show.description      // Based on the fantasy novel series "A Song of Ice and Fire," Game of Thrones explores the story of an epic battle among seven kingdoms and two ruling families in the only game that matters - the Game of Thrones. All seek control of the Iron Throne, the possession of which ensures survival through the 40-year winter to come.
+    show.imdbId           // tt0944947
+    show.premiereDate     // 2011-04-17
     show.banner           // http://www.thetvdb.com/api/banners/graphical/121361-g19.jpg
     show.bannerThumbnail  // http://www.thetvdb.com/api/banners/_cache/graphical/121361-g19.jpg
 
@@ -41,6 +41,7 @@ The properties of `show` include all of the above and in addition to that, the f
     show.runtime         // 60
     show.network         // HBO
     show.contentRating   // TV-MA
+    show.rating          // 9.4
     show.poster          // http://www.thetvdb.com/api/banners/posters/121361-13.jpg
     show.posterThumbnail // http://www.thetvdb.com/api/banners/_cache/posters/121361-13.jpg
 
