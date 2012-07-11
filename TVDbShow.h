@@ -38,6 +38,7 @@
 
 + (NSMutableArray *)findByName:(NSString *)name;
 + (TVDbShow *)findById:(NSNumber *)showId;
++ (NSMutableArray *)findEpisodesByShowId:(NSNumber *)showId;
 
 - (TVDbShow *)initWithDictionary:(NSDictionary *)dictionary;
 
