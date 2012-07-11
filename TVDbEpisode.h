@@ -18,13 +18,15 @@
 @property (nonatomic, retain) NSNumber *seasonNumber;
 @property (nonatomic, retain) NSNumber *episodeNumber;
 @property (nonatomic, retain) NSString *banner;
-@property (nonatomic, retain) NSString *director;
+@property (nonatomic, retain) NSString *bannerThumbnail;
 @property (nonatomic, retain) NSString *writer;
-@property (nonatomic, retain) NSDate   *airDate;
-@property (nonatomic, retain) NSNumber *rating;
+@property (nonatomic, retain) NSString *director;
+@property (nonatomic, retain) NSArray  *gueststars;
 @property (nonatomic, retain) NSString *imdbId;
+@property (nonatomic, retain) NSDate   *premiereDate;
+@property (nonatomic, retain) NSNumber *rating;
 
-+ (TVDbEpisode *)findById:(NSNumber *)id;
-+ (TVDbEpisode *)findByShowId:(NSNumber *)showId seasonNumber:(NSNumber *)seasonNumber EpisodeNumber:(NSNumber *)episodeNumber;
++ (TVDbEpisode *)findById:(NSNumber *)episodeId;
++ (TVDbEpisode *)findByShowId:(NSNumber *)showId seasonNumber:(NSNumber *)seasonNumber episodeNumber:(NSNumber *)episodeNumber;
 
 @end
