@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class TVDbClient, TVDbImage, XMLReader;
+@class TVDbClient, TVDbEpisode, TVDbImage, XMLReader;
 
 @interface TVDbShow : NSObject
 

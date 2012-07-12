@@ -8,6 +8,7 @@
 
 #import "TVDbShow.h"
 #import "TVDbClient.h"
+#import "TVDbEpisode.h"
 #import "TVDbImage.h"
 
 #import "XMLReader.h"
@@ -20,13 +21,16 @@
 + (NSString *)searchTerm:(NSString *)term;
 + (NSString *)showUrl:(NSNumber *)showId;
 
+- (void)buildEpisodesWithDictionary:(NSDictionary *)dictionary;
+- (void)buildEpisodeWithDictionary:(NSDictionary *)dictionary reference:(NSMutableArray **)reference;
+
 @end
 
 
 @implementation TVDbShow
 
 @synthesize showId, title, description, banner, bannerThumbnail, imdbId, premiereDate;
-@synthesize status, genre, actors, poster, posterThumbnail, airDay, airTime, runtime, network, contentRating, rating;
+@synthesize status, genre, actors, poster, posterThumbnail, airDay, airTime, runtime, network, contentRating, rating, episodes;
 
 #pragma mark - initializers
 
@@ -34,17 +38,19 @@
 {
     if (self = [super init])
     {
+        NSDictionary *showDictionary = [dictionary retrieveForPath:@"Series"];
+        
         // properties retrieved by a basic search request
         
-        self.showId          = [NSNumber numberWithInt:[[dictionary retrieveForPath:@"id"] intValue]];
-        self.title           = [dictionary retrieveForPath:@"SeriesName"];
-        self.description     = [dictionary retrieveForPath:@"Overview"];
-        self.imdbId          = [dictionary retrieveForPath:@"IMDB_ID"];
-        self.premiereDate    = [NSString stringToDate:[dictionary retrieveForPath:@"FirstAired"]];
+        self.showId          = [NSNumber numberWithInt:[[showDictionary retrieveForPath:@"id"] intValue]];
+        self.title           = [showDictionary retrieveForPath:@"SeriesName"];
+        self.description     = [showDictionary retrieveForPath:@"Overview"];
+        self.imdbId          = [showDictionary retrieveForPath:@"IMDB_ID"];
+        self.premiereDate    = [NSString stringToDate:[showDictionary retrieveForPath:@"FirstAired"]];
         
-        if ([dictionary retrieveForPath:@"banner"])
+        if ([showDictionary retrieveForPath:@"banner"])
         {
-            TVDbImage *bannerImage = [[TVDbImage alloc] initWithUrl:[dictionary retrieveForPath:@"banner"]];
+            TVDbImage *bannerImage = [[TVDbImage alloc] initWithUrl:[showDictionary retrieveForPath:@"banner"]];
             
             self.banner          = [bannerImage url];
             self.bannerThumbnail = [bannerImage thumbnailUrl];
@@ -52,22 +58,27 @@
         
         // properties retrieved by a detailed series search request
         
-        self.status          = [dictionary retrieveForPath:@"Status"];
-        self.genre           = [NSString stringToArray:[dictionary retrieveForPath:@"Genre"]];
-        self.actors          = [NSString stringToArray:[dictionary retrieveForPath:@"Actors"]];
-        self.airDay          = [dictionary retrieveForPath:@"Airs_DayOfWeek"];
-        self.airTime         = [dictionary retrieveForPath:@"Airs_Time"];
-        self.runtime         = [dictionary retrieveForPath:@"Runtime"];
-        self.network         = [dictionary retrieveForPath:@"Network"];
-        self.contentRating   = [dictionary retrieveForPath:@"ContentRating"];
-        self.rating          = [dictionary retrieveForPath:@"Rating"];
+        self.status          = [showDictionary retrieveForPath:@"Status"];
+        self.genre           = [NSString stringToArray:[showDictionary retrieveForPath:@"Genre"]];
+        self.actors          = [NSString stringToArray:[showDictionary retrieveForPath:@"Actors"]];
+        self.airDay          = [showDictionary retrieveForPath:@"Airs_DayOfWeek"];
+        self.airTime         = [showDictionary retrieveForPath:@"Airs_Time"];
+        self.runtime         = [showDictionary retrieveForPath:@"Runtime"];
+        self.network         = [showDictionary retrieveForPath:@"Network"];
+        self.contentRating   = [showDictionary retrieveForPath:@"ContentRating"];
+        self.rating          = [showDictionary retrieveForPath:@"Rating"];
         
-        if ([dictionary retrieveForPath:@"poster"])
+        if ([showDictionary retrieveForPath:@"poster"])
         {
-            TVDbImage *posterImage = [[TVDbImage alloc] initWithUrl:[dictionary retrieveForPath:@"poster"]];
+            TVDbImage *posterImage = [[TVDbImage alloc] initWithUrl:[showDictionary retrieveForPath:@"poster"]];
             
             self.poster          = [posterImage url];
             self.posterThumbnail = [posterImage thumbnailUrl];
+        }
+        
+        if ([dictionary retrieveForPath:@"Episode"])
+        {
+            [self buildEpisodesWithDictionary:[dictionary retrieveForPath:@"Episode"]];
         }
     }
     return self;
@@ -77,7 +88,7 @@
 
 + (NSMutableArray *)findByName:(NSString *)name
 {
-    id response = [[[TVDbClient sharedInstance] requestURL:[self searchTermUrl:name]] retrieveForPath:@"Data.Series"];
+    id response = [[[TVDbClient sharedInstance] requestURL:[self searchTermUrl:name]] retrieveForPath:@"Data"];
     
     NSMutableArray *shows = [NSMutableArray array];
     if ([response isKindOfClass:[NSDictionary class]])
@@ -125,7 +136,30 @@
 
 + (NSString *)showUrl:(NSNumber *)showId
 {
-    return [[[TVDbClient sharedInstance] apiKey] stringByAppendingString: [NSString stringWithFormat: @"/series/%@", showId]];
+    return [[[TVDbClient sharedInstance] apiKey] stringByAppendingString:[NSString stringWithFormat:@"/series/%@/all/", showId]];
+}
+
+- (void)buildEpisodesWithDictionary:(NSDictionary *)dictionary
+{
+    NSMutableArray *showEpisodes = [NSMutableArray array];
+    if ([dictionary isKindOfClass:[NSDictionary class]])
+    {
+        [self buildEpisodeWithDictionary:dictionary reference:&showEpisodes];
+    }
+    if ([dictionary isKindOfClass:[NSArray class]])
+    {
+        for (id episodeDictionary in dictionary)
+        {
+            [self buildEpisodeWithDictionary:episodeDictionary reference:&showEpisodes];
+        }
+    }
+    self.episodes = showEpisodes;
+}
+         
+- (void)buildEpisodeWithDictionary:(NSDictionary *)dictionary reference:(NSMutableArray **)reference
+{
+    TVDbEpisode *episode = [[TVDbEpisode alloc] initWithDictionary:dictionary];
+    [*reference addObject:episode];
 }
 
 @end

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class TVDbClient;
+@class TVDbClient, XMLReader;
 
 @interface TVDbEpisode : NSObject
 
@@ -19,8 +19,8 @@
 @property (nonatomic, retain) NSNumber *episodeNumber;
 @property (nonatomic, retain) NSString *banner;
 @property (nonatomic, retain) NSString *bannerThumbnail;
-@property (nonatomic, retain) NSString *writer;
-@property (nonatomic, retain) NSString *director;
+@property (nonatomic, retain) NSArray  *writer;
+@property (nonatomic, retain) NSArray  *director;
 @property (nonatomic, retain) NSArray  *gueststars;
 @property (nonatomic, retain) NSString *imdbId;
 @property (nonatomic, retain) NSDate   *premiereDate;
@@ -28,5 +28,7 @@
 
 + (TVDbEpisode *)findById:(NSNumber *)episodeId;
 + (TVDbEpisode *)findByShowId:(NSNumber *)showId seasonNumber:(NSNumber *)seasonNumber episodeNumber:(NSNumber *)episodeNumber;
+
+- (TVDbEpisode *)initWithDictionary:(NSDictionary *)dictionary;
 
 @end
