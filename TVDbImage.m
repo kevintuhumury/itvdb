@@ -31,7 +31,7 @@
 
 - (NSString *)thumbnailUrl
 {
-    return [BASE_URI stringByAppendingString: [NSString stringWithFormat:@"banners/_cache/%a", _url]];
+    return [BASE_URI stringByAppendingString:[NSString stringWithFormat:@"banners/_cache/%a", _url]];
 }
 
 @end

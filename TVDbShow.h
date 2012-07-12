@@ -25,8 +25,8 @@
 // extra properties of a show
 
 @property (nonatomic, retain) NSString *status;
-@property (nonatomic, retain) NSArray *genre;
-@property (nonatomic, retain) NSArray *actors;
+@property (nonatomic, retain) NSArray  *genre;
+@property (nonatomic, retain) NSArray  *actors;
 @property (nonatomic, retain) NSString *poster;
 @property (nonatomic, retain) NSString *posterThumbnail;
 @property (nonatomic, retain) NSString *airDay;
@@ -35,10 +35,10 @@
 @property (nonatomic, retain) NSString *network;
 @property (nonatomic, retain) NSString *contentRating;
 @property (nonatomic, retain) NSNumber *rating;
+@property (nonatomic, retain) NSMutableArray *episodes;
 
 + (NSMutableArray *)findByName:(NSString *)name;
 + (TVDbShow *)findById:(NSNumber *)showId;
-+ (NSMutableArray *)findEpisodesByShowId:(NSNumber *)showId;
 
 - (TVDbShow *)initWithDictionary:(NSDictionary *)dictionary;
 

@@ -107,20 +107,15 @@
 
 + (TVDbShow *)findById:(NSNumber *)showId
 {
-    NSDictionary *responseDictionary = [[TVDbClient sharedInstance] requestURL: [self showUrl:showId]];
-    return [[TVDbShow alloc] initWithDictionary: [responseDictionary retrieveForPath:@"Data.Series"]];
-}
-
-+ (NSMutableArray *)findEpisodesByShowId:(NSNumber *)showId
-{
-    // TODO
+    NSDictionary *responseDictionary = [[TVDbClient sharedInstance] requestURL:[self showUrl:showId]];
+    return [[TVDbShow alloc] initWithDictionary:[responseDictionary retrieveForPath:@"Data"]];
 }
 
 # pragma mark - internal methods
 
 + (void)buildShowWithDictionary:(NSDictionary *)dictionary reference:(NSMutableArray **)reference
 {
-    TVDbShow * show = [[TVDbShow alloc] initWithDictionary:dictionary];
+    TVDbShow *show = [[TVDbShow alloc] initWithDictionary:dictionary];
     [*reference addObject:show];
 }
 
