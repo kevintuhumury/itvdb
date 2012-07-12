@@ -12,7 +12,22 @@
 
 + (NSArray *)stringToArray:(NSString *)string
 {
-    return [[string substringWithRange: NSMakeRange(1, [string length] - 2)] componentsSeparatedByString: @"|"];
+    if ([string hasPrefix:@"|"])
+    {
+        string = [string substringFromIndex:1];
+    }
+    if ([string hasSuffix:@"|"])
+    {
+        string = [string substringToIndex:[string length] - 1];
+    }
+    if ([string rangeOfString:@"|"].location == NSNotFound)
+    {
+        return [NSArray arrayWithObject:string];
+    }
+    else
+    {
+        return [string componentsSeparatedByString:@"|"];
+    }
 }
 
 + (NSDate *)stringToDate:(NSString *)string
