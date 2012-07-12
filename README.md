@@ -1,4 +1,4 @@
-# iTVDb (TheTVDB)
+# iTVDb (iOS wrapper for the TheTVDB XML API)
 
 These Objective-C classes provide a wrapper around the [TVDB](http://thetvdb.com) XML API and can be used in iOS apps. These classes are Objective-C ARC (Automatic Reference Counting), so you'll need to enable ARC in XCode when setting up a new project. ARC is supported in iOS 4.0 and above, but you'll need to use the iOS 5.x SDK.
 
@@ -8,13 +8,21 @@ For now just copy over the files in this repository to your project.
 
 ## Usage
 
-An API key is needed to use the iTVDb wrapper in your iOS app, except for one call: `findByName:`, which technically can be called without one. The following will show you how to retrieve all the TV shows that match 'Game of Thrones':
+To start using the iTVDb iOS wrapper classes you'll first need an API key from the TVDB website. An API key can be retrieved by [registering](http://thetvdb.com/?tab=apiregister) for one on the TVDB website. Once you have an API key, you'll need to initialize the TVDbClient by setting it as the following:
+
+    [[TVDbClient sharedInstance] setApiKey: @"YOUR API KEY"];
+
+Now that you've set your API key, you'll be able to start using the `TVDbShow` and `TVDbEpisode` classes.
+
+### TVDbShow
+
+As described above an API key is needed to use the iTVDb iOS wrapper in your iOS app, except for one call, which is `findByName:` on the `TVDbShow` class. This method can technically be called without one. The following will show you how to retrieve all the TV shows that match 'Game of Thrones':
 
     NSMutableArray *shows = [TVDbShow findByName:@"Game of Thrones"];
 
 This will internally retrieve an XML file from the TVDB API, convert it to a NSDictionary and load it into a TVDbShow object, which in turn will be added to the NSMutableArray called `shows`. The data retrieved from this call is some basic information about the TV show.
 
-If you want more detailed information, an API key is needed. Since this has to be retrieved with another API call. The NSMutableArray `shows` can contain multiple TVDbShow instances, but in this case it's a single object. The following properties can be accessed from the TVDbShow instance:
+If you want more detailed information, an API key is needed. Since the detailed information has to be retrieved by another API call. The NSMutableArray `shows` can contain multiple TVDbShow instances, but in this case it's a single object. The following properties can be accessed from the TVDbShow instance:
 
     show.showId           // 121361
     show.title            // Game of Thrones
@@ -24,11 +32,8 @@ If you want more detailed information, an API key is needed. Since this has to b
     show.banner           // http://www.thetvdb.com/api/banners/graphical/121361-g19.jpg
     show.bannerThumbnail  // http://www.thetvdb.com/api/banners/_cache/graphical/121361-g19.jpg
 
-As mentioned above, all API calls except for `findByName:` on the `TVDbShow` class need an API key. An API key can be retrieved by [registering](http://thetvdb.com/?tab=apiregister) for one on the TVDB website. Once you have an API key, you'll be able to use the other methods.
+To retrieve the detailed information of 'Game of Thrones', the `showId` from the previous API call is needed. Below is an example of retrieving such information.
 
-To retrieve the detailed information of 'Game of Thrones', the `showId` from the previous API call is needed. Below is an example of retrieving such information and setting your API key.
-
-    [[TVDbClient sharedInstance] setApiKey: @"YOUR API KEY"];
     TVDbShow *show = [TVDbShow findById:[NSNumber numberWithInt:121361]];
 
 The properties of `show` include all of the above and in addition to that, the following:
@@ -44,10 +49,30 @@ The properties of `show` include all of the above and in addition to that, the f
     show.rating          // 9.4
     show.poster          // http://www.thetvdb.com/api/banners/posters/121361-13.jpg
     show.posterThumbnail // http://www.thetvdb.com/api/banners/_cache/posters/121361-13.jpg
+    show.episodes        // [<TVDbEpisode instance>, <TVDbEpisode instance>, ...]
 
-## Notice!
+### TVDbEpisode
 
-The TVDB XML API hasn't been completely covered yet. Right now, it includes the above. So, obviously it's a WIP.
+When you have an instance of the `TVDbShow` class, you're able to retrieve the belonging episodes by calling: `show.episodes`. But you're also able to retrieve an episode by using the `findById:` and `findByShowId:seasonNumber:episodeNumber:` class methods as described below:
+
+    TVDbEpisode *episode = [TVDbEpisode findById:[NSNumber numberWithInt:4245779]];
+    TVDbEpisode *episode = [TVDbEpisode findByShowId:[NSNumber numberWithInt:121361] seasonNumber:[NSNumber numberWithInt:2] episodeNumber:[NSNumber numberWithInt:9]];
+
+The above class methods both return a `TVDbEpisode` instance. The properties which can be retrieved from `episode` (in both cases) are the following:
+
+    episode.episodeId       // 4245779
+    episode.title           // Valar Morghulis
+    episode.description     // Tyrion awakens to a changed situation. King Joffrey doles out rewards to his subjects. As Theon stirs his men to action, Luwin offers some final advice. Brienne silences Jaime. Arya receives a gift from Jaqen. Dany goes to a strange place. Jon proves himself to Qhorin.
+    episode.seasonNumber    // 2
+    episode.episodeNumber   // 10
+    episode.banner          // http://www.thetvdb.com/api/banners/episodes/121361/4245779.jpg
+    episode.bannerThumbnail // http://www.thetvdb.com/api/banners/_cache/episodes/121361/4245779.jpg
+    episode.writer          // ["David Benioff", "D.B. Weiss"]
+    episode.director        // ["Alan Taylor"]
+    episode.gueststars      // in this case it's empty, but when filled it's an array like `episode.writer`
+    episode.imdbId          // tt2112510
+    episode.premiereDate    // 2012-06-03
+    episode.rating          // 8.5
 
 ## Credit where credit is due
 
