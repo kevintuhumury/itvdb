@@ -15,7 +15,8 @@
 
 @interface TVDbEpisode()
 
-+ (NSString *)episodesUrl:(NSNumber *)showId;
++ (NSString *)episodeUrl:(NSNumber *)episodeId;
++ (NSString *)episodeUrlByShowId:(NSNumber *)showId seasonNumber:(NSNumber *)seasonNumber episodeNumber:(NSNumber *)episodeNumber;
 
 @end
 
@@ -58,19 +59,26 @@
 
 + (TVDbEpisode *)findById:(NSNumber *)episodeId
 {
-    // TODO
+    NSDictionary *episodeDictionary = [[TVDbClient sharedInstance] requestURL:[self episodeUrl:episodeId]];
+    return [[TVDbEpisode alloc] initWithDictionary:[episodeDictionary retrieveForPath:@"Data.Episode"]];
 }
 
 + (TVDbEpisode *)findByShowId:(NSNumber *)showId seasonNumber:(NSNumber *)seasonNumber episodeNumber:(NSNumber *)episodeNumber
 {
-    // TODO
+    NSDictionary *episodeDictionary = [[TVDbClient sharedInstance] requestURL:[self episodeUrlByShowId:showId seasonNumber:seasonNumber episodeNumber:episodeNumber]];
+    return [[TVDbEpisode alloc] initWithDictionary:[episodeDictionary retrieveForPath:@"Data.Episode"]];
 }
 
 #pragma mark - internal methods
 
-+ (NSString *)episodesUrl:(NSNumber *)showId
++ (NSString *)episodeUrl:(NSNumber *)episodeId
 {
-    return [[[TVDbClient sharedInstance] apiKey] stringByAppendingString: [NSString stringWithFormat: @"/series/%@/all/", showId]];
+    return [[[TVDbClient sharedInstance] apiKey] stringByAppendingString:[NSString stringWithFormat:@"/episodes/%@", episodeId]];
+}
+
++ (NSString *)episodeUrlByShowId:(NSNumber *)showId seasonNumber:(NSNumber *)seasonNumber episodeNumber:(NSNumber *)episodeNumber
+{
+    return [[[TVDbClient sharedInstance] apiKey] stringByAppendingString:[NSString stringWithFormat:@"/series/%@/default/%@/%@", showId, seasonNumber, episodeNumber]];
 }
 
 @end
