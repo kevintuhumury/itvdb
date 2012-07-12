@@ -44,9 +44,9 @@
             self.bannerThumbnail   = [bannerImage thumbnailUrl];
         }
         
-        self.writer          = [NSString stringToArray:[dictionary retrieveForPath:@"Writer"]];
-        self.director        = [NSString stringToArray:[dictionary retrieveForPath:@"Director"]];
-        self.gueststars      = [NSString stringToArray:[dictionary retrieveForPath:@"GuestStars"]];
+        self.writer          = [NSString pipedStringToArray:[dictionary retrieveForPath:@"Writer"]];
+        self.director        = [NSString pipedStringToArray:[dictionary retrieveForPath:@"Director"]];
+        self.gueststars      = [NSString pipedStringToArray:[dictionary retrieveForPath:@"GuestStars"]];
         self.imdbId          = [dictionary retrieveForPath:@"IMDB_ID"];
         self.premiereDate    = [NSString stringToDate:[dictionary retrieveForPath:@"FirstAired"]];
         self.rating          = [dictionary retrieveForPath:@"Rating"];

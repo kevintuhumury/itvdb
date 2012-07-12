@@ -59,8 +59,8 @@
         // properties retrieved by a detailed series search request
         
         self.status          = [showDictionary retrieveForPath:@"Status"];
-        self.genre           = [NSString stringToArray:[showDictionary retrieveForPath:@"Genre"]];
-        self.actors          = [NSString stringToArray:[showDictionary retrieveForPath:@"Actors"]];
+        self.genre           = [NSString pipedStringToArray:[showDictionary retrieveForPath:@"Genre"]];
+        self.actors          = [NSString pipedStringToArray:[showDictionary retrieveForPath:@"Actors"]];
         self.airDay          = [showDictionary retrieveForPath:@"Airs_DayOfWeek"];
         self.airTime         = [showDictionary retrieveForPath:@"Airs_Time"];
         self.runtime         = [showDictionary retrieveForPath:@"Runtime"];

@@ -10,7 +10,7 @@
 
 @implementation NSString (Helper)
 
-+ (NSArray *)stringToArray:(NSString *)string
++ (NSArray *)pipedStringToArray:(NSString *)string
 {
     if ([string hasPrefix:@"|"])
     {

@@ -10,7 +10,7 @@
 
 @interface NSString (Helper)
 
-+ (NSArray *)stringToArray:(NSString *)string;
++ (NSArray *)pipedStringToArray:(NSString *)string;
 + (NSDate *)stringToDate:(NSString *)string;
 
 @end
