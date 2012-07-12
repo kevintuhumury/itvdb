@@ -73,6 +73,7 @@ The above class methods both return a `TVDbEpisode` instance. The properties whi
     episode.imdbId          // tt2112510
     episode.premiereDate    // 2012-06-03
     episode.rating          // 8.5
+    episode.showId          // 121361
 
 ## Credit where credit is due
 
