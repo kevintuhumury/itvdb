@@ -23,7 +23,7 @@
 
 @implementation TVDbEpisode
 
-@synthesize episodeId, title, description, seasonNumber, episodeNumber, banner, bannerThumbnail, writer, director, gueststars, imdbId, premiereDate, rating;
+@synthesize episodeId, title, description, seasonNumber, episodeNumber, banner, bannerThumbnail, writer, director, gueststars, imdbId, premiereDate, rating, showId;
 
 #pragma mark - initializers
 
@@ -51,6 +51,7 @@
         self.imdbId          = [dictionary retrieveForPath:@"IMDB_ID"];
         self.premiereDate    = [NSString stringToDate:[dictionary retrieveForPath:@"FirstAired"]];
         self.rating          = [dictionary retrieveForPath:@"Rating"];
+        self.showId          = [NSNumber numberWithInt:[[dictionary retrieveForPath:@"seriesid"] intValue]];
     }
     return self;
 }

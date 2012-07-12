@@ -25,6 +25,7 @@
 @property (nonatomic, retain) NSString *imdbId;
 @property (nonatomic, retain) NSDate   *premiereDate;
 @property (nonatomic, retain) NSNumber *rating;
+@property (nonatomic, retain) NSNumber *showId;
 
 + (TVDbEpisode *)findById:(NSNumber *)episodeId;
 + (TVDbEpisode *)findByShowId:(NSNumber *)showId seasonNumber:(NSNumber *)seasonNumber episodeNumber:(NSNumber *)episodeNumber;
