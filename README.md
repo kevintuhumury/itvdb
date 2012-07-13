@@ -77,7 +77,7 @@ The above class methods both return a `TVDbEpisode` instance. The properties whi
 
 ### TVDbUpdater
 
-When you've got a list of shows in your app, you might want to retrieve the shows with new episodes (or maybe just the episodes). The `TVDbUpdater` singleton can help you with that. The first time you have a list with shows (or episodes), you should save the timestamp of that moment in your app. Well, that's as easy as the following:
+When you've got a list of shows in your app, you might want to retrieve the shows with new episodes (or maybe just the episodes). The `TVDbUpdater` singleton can help you with that. The first time you have a list of shows (or episodes), you should save the timestamp of that moment in your app. Well, that's as easy as the following:
 
     [[TVDbUpdater sharedInstance] updateLastUpdatedAtTimestamp];
 
