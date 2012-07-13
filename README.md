@@ -75,6 +75,20 @@ The above class methods both return a `TVDbEpisode` instance. The properties whi
     episode.rating          // 8.5
     episode.showId          // 121361
 
+### TVDbUpdater
+
+When you've got a list of shows in your app, you might want to retrieve the shows with new episodes (or maybe just the episodes). The `TVDbUpdater` singleton can help you with that. The first time you have a list with shows (or episodes), you should save the timestamp of that moment in your app. Well, that's as easy as the following:
+
+    [[TVDbUpdater sharedInstance] updateLastUpdatedAtTimestamp];
+
+Once you've done that, you're set for the next update. Let's say you want to update the list of shows (or episodes) the next day. You'll be able to retrieve just the updated shows, episodes or both of them (from that moment on) with the following methods:
+
+    NSDictionary *showUpdates = [[TVDbUpdater sharedInstance] showUpdates];
+    NSDictionary *episodeUpdates = [[TVDbUpdater sharedInstance] episodeUpdates];
+    NSDictionary *updates = [[TVDbUpdater sharedInstance] updates];
+
+Just to clarify, all of these methods will retrieve data from the moment that was saved with the `updateLastUpdatedAtTimestamp` method until the very moment you call one of the update methods listed above.
+
 ## Credit where credit is due
 
 iTVDb uses the [XML-to-NSDictionary](https://github.com/bcaccinolo/XML-to-NSDictionary) library by bcaccinolo to convert the retrieved XML into a NSDictionary.
@@ -86,7 +100,7 @@ You're very welcome to contribute to this project. To do so, follow these steps:
 1. Fork this project
 2. Clone your fork on your local machine
 3. Create your feature branch with `git checkout -b my-new-feature`
-4. Add the actual new feature
+4. Add a new feature, like perhaps TVDbActor, TVDbMirror or improve an existing feature
 5. Commit your changes `git commit -am 'Added new feature'`
 6. Push to your branch `git push origin my-new-feature`
 7. Create a new Pull Request
