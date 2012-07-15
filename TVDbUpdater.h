@@ -12,7 +12,7 @@
 
 @interface TVDbUpdater : NSObject
 
-@property (nonatomic, retain) NSString *lastUpdatedAt;
+@property (nonatomic, strong) NSString *lastUpdatedAt;
 
 + (TVDbUpdater *)sharedInstance;
 

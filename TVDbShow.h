@@ -14,28 +14,28 @@
 
 // basic properties of a show
 
-@property (nonatomic, retain) NSNumber *showId;
-@property (nonatomic, retain) NSString *title;
-@property (nonatomic, retain) NSString *description;
-@property (nonatomic, retain) NSString *banner;
-@property (nonatomic, retain) NSString *bannerThumbnail;
-@property (nonatomic, retain) NSString *imdbId;
-@property (nonatomic, retain) NSDate   *premiereDate;
+@property (nonatomic, strong) NSNumber *showId;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *description;
+@property (nonatomic, strong) NSString *banner;
+@property (nonatomic, strong) NSString *bannerThumbnail;
+@property (nonatomic, strong) NSString *imdbId;
+@property (nonatomic, strong) NSDate *premiereDate;
 
 // extra properties of a show
 
-@property (nonatomic, retain) NSString *status;
-@property (nonatomic, retain) NSArray  *genre;
-@property (nonatomic, retain) NSArray  *actors;
-@property (nonatomic, retain) NSString *poster;
-@property (nonatomic, retain) NSString *posterThumbnail;
-@property (nonatomic, retain) NSString *airDay;
-@property (nonatomic, retain) NSString *airTime;
-@property (nonatomic, retain) NSString *runtime;
-@property (nonatomic, retain) NSString *network;
-@property (nonatomic, retain) NSString *contentRating;
-@property (nonatomic, retain) NSNumber *rating;
-@property (nonatomic, retain) NSMutableArray *episodes;
+@property (nonatomic, strong) NSString *status;
+@property (nonatomic, strong) NSArray *genre;
+@property (nonatomic, strong) NSArray *actors;
+@property (nonatomic, strong) NSString *poster;
+@property (nonatomic, strong) NSString *posterThumbnail;
+@property (nonatomic, strong) NSString *airDay;
+@property (nonatomic, strong) NSString *airTime;
+@property (nonatomic, strong) NSString *runtime;
+@property (nonatomic, strong) NSString *network;
+@property (nonatomic, strong) NSString *contentRating;
+@property (nonatomic, strong) NSNumber *rating;
+@property (nonatomic, strong) NSMutableArray *episodes;
 
 + (NSMutableArray *)findByName:(NSString *)name;
 + (TVDbShow *)findById:(NSNumber *)showId;

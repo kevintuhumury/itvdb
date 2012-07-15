@@ -18,8 +18,8 @@
     NSString *_language;
 }
 
-@property (nonatomic, retain) NSString *apiKey;
-@property (nonatomic, retain) NSString *language;
+@property (nonatomic, strong) NSString *apiKey;
+@property (nonatomic, strong) NSString *language;
 
 + (TVDbClient *)sharedInstance;
 

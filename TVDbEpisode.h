@@ -12,20 +12,20 @@
 
 @interface TVDbEpisode : NSObject
 
-@property (nonatomic, retain) NSNumber *episodeId;
-@property (nonatomic, retain) NSString *title;
-@property (nonatomic, retain) NSString *description;
-@property (nonatomic, retain) NSNumber *seasonNumber;
-@property (nonatomic, retain) NSNumber *episodeNumber;
-@property (nonatomic, retain) NSString *banner;
-@property (nonatomic, retain) NSString *bannerThumbnail;
-@property (nonatomic, retain) NSArray  *writer;
-@property (nonatomic, retain) NSArray  *director;
-@property (nonatomic, retain) NSArray  *gueststars;
-@property (nonatomic, retain) NSString *imdbId;
-@property (nonatomic, retain) NSDate   *premiereDate;
-@property (nonatomic, retain) NSNumber *rating;
-@property (nonatomic, retain) NSNumber *showId;
+@property (nonatomic, strong) NSNumber *episodeId;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *description;
+@property (nonatomic, strong) NSNumber *seasonNumber;
+@property (nonatomic, strong) NSNumber *episodeNumber;
+@property (nonatomic, strong) NSString *banner;
+@property (nonatomic, strong) NSString *bannerThumbnail;
+@property (nonatomic, strong) NSArray *writer;
+@property (nonatomic, strong) NSArray *director;
+@property (nonatomic, strong) NSArray *gueststars;
+@property (nonatomic, strong) NSString *imdbId;
+@property (nonatomic, strong) NSDate *premiereDate;
+@property (nonatomic, strong) NSNumber *rating;
+@property (nonatomic, strong) NSNumber *showId;
 
 + (TVDbEpisode *)findById:(NSNumber *)episodeId;
 + (TVDbEpisode *)findByShowId:(NSNumber *)showId seasonNumber:(NSNumber *)seasonNumber episodeNumber:(NSNumber *)episodeNumber;
