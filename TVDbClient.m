@@ -27,7 +27,7 @@
 {
     static dispatch_once_t onlyOnceToken = 0;
     __strong static TVDbClient *sharedObject = nil;
-    
+
     dispatch_once(&onlyOnceToken, ^{
         sharedObject = [[TVDbClient alloc] initWithLanguage: @"en"];
     });
@@ -51,18 +51,14 @@
 {
     NSMutableData *data     = [NSMutableData data];
     NSString *baseUrl       = [BASE_URI stringByAppendingString:url];
-    
-    NSLog(@"--------------------------------------------------");
-    NSLog(@" Connecting to: %@", baseUrl);
-    NSLog(@"--------------------------------------------------");
-    
+
     NSURLRequest *request   = [NSURLRequest requestWithURL:[NSURL URLWithString:baseUrl]];
     NSURLResponse *response = [[NSURLResponse alloc] init];
     NSError *error          = [[NSError alloc] init];
     NSData *responseData    = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
+
     [data setData:responseData];
-    
+
     return [XMLReader dictionaryForXMLData:data error:&error];
 }
 
