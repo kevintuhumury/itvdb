@@ -4,7 +4,26 @@ These Objective-C classes provide a wrapper around the [TVDB](http://thetvdb.com
 
 ## Installation
 
-For now just copy over the files in this repository to your project.
+iTVDb is available through [CocoaPods](http://cocoapods.org), so you can either add iTVDb as a pod or add it the old fashioned way. Both options are shown below:
+
+### Using CocoaPods
+
+Don't know what CocoaPods is? Well, it's the best way to manage library dependencies in Objective-C projects, so checkout their [website](http://cocoapods.org) to install CocoaPods and get started. Then continue with the following:
+
+1. Add iTVDb to your Podfile:
+
+    platform :ios
+
+    pod 'iTVDb'
+
+2. Run `pod install`
+3. Open your `ProjectName.xcworkspace` instead of `ProjectName.xcodeproj`
+4. `#import "iTVDb.h"`
+
+### Adding iTVDb the old fashioned way
+
+1. Drag the `*.h` and `*.m` files from this repository into your project.
+2. `#import "iTVDb.h"`
 
 ## Usage
 
