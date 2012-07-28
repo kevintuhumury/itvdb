@@ -14,7 +14,7 @@ Don't know what CocoaPods is? Well, it's the best way to manage library dependen
 
     ```
     platform :ios
-    pod 'iTVDb'
+    pod "iTVDb"
     ```
 2. Run `pod install`
 3. Open your `ProjectName.xcworkspace` instead of `ProjectName.xcodeproj`
