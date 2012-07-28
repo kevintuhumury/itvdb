@@ -38,26 +38,30 @@
 {
     if (self = [super init])
     {
-        NSDictionary *showDictionary = [dictionary retrieveForPath:@"Series"];
-        
+        NSDictionary *showDictionary = dictionary;
+        if ([dictionary retrieveForPath:@"Series"])
+        {
+            showDictionary = [dictionary retrieveForPath:@"Series"];
+        }
+
         // properties retrieved by a basic search request
-        
+
         self.showId          = [NSNumber numberWithInt:[[showDictionary retrieveForPath:@"id"] intValue]];
         self.title           = [showDictionary retrieveForPath:@"SeriesName"];
         self.description     = [showDictionary retrieveForPath:@"Overview"];
         self.imdbId          = [showDictionary retrieveForPath:@"IMDB_ID"];
         self.premiereDate    = [NSString stringToDate:[showDictionary retrieveForPath:@"FirstAired"]];
-        
+
         if ([showDictionary retrieveForPath:@"banner"])
         {
             TVDbImage *bannerImage = [[TVDbImage alloc] initWithUrl:[showDictionary retrieveForPath:@"banner"]];
-            
+
             self.banner          = [bannerImage url];
             self.bannerThumbnail = [bannerImage thumbnailUrl];
         }
-        
+
         // properties retrieved by a detailed series search request
-        
+
         self.status          = [showDictionary retrieveForPath:@"Status"];
         self.genre           = [NSString pipedStringToArray:[showDictionary retrieveForPath:@"Genre"]];
         self.actors          = [NSString pipedStringToArray:[showDictionary retrieveForPath:@"Actors"]];
@@ -67,15 +71,15 @@
         self.network         = [showDictionary retrieveForPath:@"Network"];
         self.contentRating   = [showDictionary retrieveForPath:@"ContentRating"];
         self.rating          = [showDictionary retrieveForPath:@"Rating"];
-        
+
         if ([showDictionary retrieveForPath:@"poster"])
         {
             TVDbImage *posterImage = [[TVDbImage alloc] initWithUrl:[showDictionary retrieveForPath:@"poster"]];
-            
+
             self.poster          = [posterImage url];
             self.posterThumbnail = [posterImage thumbnailUrl];
         }
-        
+
         if ([dictionary retrieveForPath:@"Episode"])
         {
             [self buildEpisodesWithDictionary:[dictionary retrieveForPath:@"Episode"]];
@@ -88,8 +92,8 @@
 
 + (NSMutableArray *)findByName:(NSString *)name
 {
-    id response = [[[TVDbClient sharedInstance] requestURL:[self searchTermUrl:name]] retrieveForPath:@"Data"];
-    
+    id response = [[[TVDbClient sharedInstance] requestURL:[self searchTermUrl:name]] retrieveForPath:@"Data.Series"];
+
     NSMutableArray *shows = [NSMutableArray array];
     if ([response isKindOfClass:[NSDictionary class]])
     {
@@ -108,7 +112,7 @@
 + (TVDbShow *)findById:(NSNumber *)showId
 {
     NSDictionary *responseDictionary = [[TVDbClient sharedInstance] requestURL:[self showUrl:showId]];
-    return [[TVDbShow alloc] initWithDictionary:[responseDictionary retrieveForPath:@"Data"]];
+    return [[TVDbShow alloc] initWithDictionary:[responseDictionary retrieveForPath:@"Data.Series"]];
 }
 
 # pragma mark - internal methods
@@ -150,7 +154,7 @@
     }
     self.episodes = showEpisodes;
 }
-         
+
 - (void)buildEpisodeWithDictionary:(NSDictionary *)dictionary reference:(NSMutableArray **)reference
 {
     TVDbEpisode *episode = [[TVDbEpisode alloc] initWithDictionary:dictionary];
