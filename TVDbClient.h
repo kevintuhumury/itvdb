@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #define BASE_URI @"http://www.thetvdb.com/api/"
+#define BASE_IMAGE_URI @"http://www.thetvdb.com/"
 
 @class XMLReader;
 

@@ -26,12 +26,12 @@
 
 - (NSString *)url
 {
-    return [BASE_URI stringByAppendingString:_url];
+    return [BASE_IMAGE_URI stringByAppendingString:_url];
 }
 
 - (NSString *)thumbnailUrl
 {
-    return [BASE_URI stringByAppendingString:[NSString stringWithFormat:@"banners/_cache/%a", _url]];
+    return [BASE_IMAGE_URI stringByAppendingString:[NSString stringWithFormat:@"banners/_cache/%@", _url]];
 }
 
 @end
