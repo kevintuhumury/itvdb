@@ -112,7 +112,7 @@
 + (TVDbShow *)findById:(NSNumber *)showId
 {
     NSDictionary *responseDictionary = [[TVDbClient sharedInstance] requestURL:[self showUrl:showId]];
-    return [[TVDbShow alloc] initWithDictionary:[responseDictionary retrieveForPath:@"Data.Series"]];
+    return [[TVDbShow alloc] initWithDictionary:[responseDictionary retrieveForPath:@"Data"]];
 }
 
 # pragma mark - internal methods
