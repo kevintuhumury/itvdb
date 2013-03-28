@@ -92,7 +92,7 @@
 
 + (NSMutableArray *)findByName:(NSString *)name
 {
-    id response = [[[TVDbClient sharedInstance] requestURL:[self searchTermUrl:name]] retrieveForPath:@"Data.Series"];
+    id response = [[[TVDbClient sharedInstance] requestURL:[self searchTermUrl:name]] retrieveForPath:@"Data"];
 
     NSMutableArray *shows = [NSMutableArray array];
     if ([response isKindOfClass:[NSDictionary class]])
