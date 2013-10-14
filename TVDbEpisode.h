@@ -12,6 +12,15 @@
 
 @interface TVDbEpisode : NSObject
 
+typedef enum {
+    FOUR_THIRD,
+    SIXTEEN_NINTH,
+    INVALID,
+    TOO_SMALL,
+    BLACK_BARS,
+    IMPROPER
+} AspectRatio;
+
 @property (nonatomic, strong) NSNumber *episodeId;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *description;
@@ -19,6 +28,7 @@
 @property (nonatomic, strong) NSNumber *episodeNumber;
 @property (nonatomic, strong) NSString *banner;
 @property (nonatomic, strong) NSString *bannerThumbnail;
+@property (nonatomic) AspectRatio bannerAspectRatio;
 @property (nonatomic, strong) NSArray *writer;
 @property (nonatomic, strong) NSArray *director;
 @property (nonatomic, strong) NSArray *gueststars;
