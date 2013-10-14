@@ -43,6 +43,30 @@
             
             self.banner            = [bannerImage url];
             self.bannerThumbnail   = [bannerImage thumbnailUrl];
+            
+            if ([dictionary retrieveForPath:@"EpImgFlag"])
+            {
+                int imgFlag = [[dictionary retrieveForPath:@"EpImgFlag"] intValue];
+                switch (imgFlag) {
+                    case 1:
+                        self.bannerAspectRatio = FOUR_THIRD;
+                        break;
+                    case 2:
+                        self.bannerAspectRatio = SIXTEEN_NINTH;
+                        break;
+                    case 3:
+                        self.bannerAspectRatio = INVALID;
+                        break;
+                    case 4:
+                        self.bannerAspectRatio = TOO_SMALL;
+                        break;
+                    case 5:
+                        self.bannerAspectRatio = BLACK_BARS;
+                        break;
+                    default:
+                        self.bannerAspectRatio = IMPROPER;
+                }
+            }
         }
         
         self.writer          = [NSString pipedStringToArray:[dictionary retrieveForPath:@"Writer"]];
