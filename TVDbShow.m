@@ -79,6 +79,14 @@
             self.poster          = [posterImage url];
             self.posterThumbnail = [posterImage thumbnailUrl];
         }
+      
+        if ([showDictionary retrieveForPath:@"fanart"])
+        {
+            TVDbImage *fanartImage = [[TVDbImage alloc] initWithUrl:[showDictionary retrieveForPath:@"fanart"]];
+            
+            self.fanart          = [fanartImage url];
+            self.fanartThumbnail = [fanartImage thumbnailUrl];
+        }
 
         if ([dictionary retrieveForPath:@"Episode"])
         {

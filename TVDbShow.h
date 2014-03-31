@@ -29,6 +29,8 @@
 @property (nonatomic, strong) NSArray *actors;
 @property (nonatomic, strong) NSString *poster;
 @property (nonatomic, strong) NSString *posterThumbnail;
+@property (nonatomic, strong) NSString *fanart;
+@property (nonatomic, strong) NSString *fanartThumbnail;
 @property (nonatomic, strong) NSString *airDay;
 @property (nonatomic, strong) NSString *airTime;
 @property (nonatomic, strong) NSString *runtime;
