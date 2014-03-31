@@ -26,7 +26,7 @@
 
 - (NSString *)url
 {
-    return [BASE_IMAGE_URI stringByAppendingString:_url];
+    return [BASE_IMAGE_URI stringByAppendingString:[NSString stringWithFormat:@"banners/%@", _url]];
 }
 
 - (NSString *)thumbnailUrl
