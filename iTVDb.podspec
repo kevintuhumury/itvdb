@@ -8,6 +8,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/kevintuhumury/itvdb.git", :tag => "0.0.4" }
   s.source_files = '**/*.{h,m}'
   s.license      = { :type => "MIT", :file => "LICENSE" }
-  s.platform     = :ios
+  s.ios.deployment_target = "6.0"
+  s.osx.deployment_target = "10.9"
   s.requires_arc = true
 end
