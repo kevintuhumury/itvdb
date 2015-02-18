@@ -1,3 +1,5 @@
+![Cocoapods](http://img.shields.io/cocoapods/v/iTVDb.svg?style=flat)
+
 # iTVDb (iOS wrapper for the TheTVDB XML API)
 
 These Objective-C classes provide a wrapper around the [TVDB](http://thetvdb.com) XML API and can be used in iOS apps. These classes are Objective-C ARC (Automatic Reference Counting), so you'll need to enable ARC in XCode when setting up a new project. ARC is supported in iOS 4.0 and above, but you'll need to use the iOS 5.x SDK.
