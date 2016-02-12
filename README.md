@@ -1,4 +1,4 @@
-![Cocoapods](http://img.shields.io/cocoapods/v/iTVDb.svg?style=flat)
+![CocoaPods](http://img.shields.io/cocoapods/v/iTVDb.svg?style=flat)
 
 # iTVDb (iOS wrapper for the TheTVDB XML API)
 
